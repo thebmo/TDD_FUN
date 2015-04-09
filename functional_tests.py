@@ -1,26 +1,38 @@
+import unittest
 from selenium import webdriver
 
-browser = webdriver.Firefox()
 
-# This dude is like "wow, have you seen this kitten video yet?
-# He loads up the site.
-browser.get('http://localhost:8000')
+class NewVisitorTest(unittest.TestCase):
+    def setUp(self):
+        self.browser = webdriver.Firefox()
+        self.browser.implicitly_wait(3)
 
-# The title reads 'to-do leests'
-assert 'Django' in browser.title
+    def tearDown(self):
+        self.browser.quit()
+    
+    def test_can_start_a_list_and_retrieve_it_later(self):
+        # This dude is like "wow, have you seen this kitten video yet?
+        # He loads up the site.
+        self.browser.get('http://localhost:8000')
 
-# There are no kittens here but rather a blank list of items to do
+        # The title reads 'to-do leests'
+        self.assertIn('To-Do', self.browser.title)
+        self.fail('Finish the test!')
 
-# The adds 'check out that sweet kitten vid' to the list
+        # There are no kittens here but rather a blank list of items to do
 
-# There is still more room for items, so he adds 'google pug pictures'
+        # The adds 'check out that sweet kitten vid' to the list
 
-# After the page refreshes, both items are on the list
+        # There is still more room for items, so he adds 'google pug pictures'
 
-# There is a special URL that gives the dude access to his link
+        # After the page refreshes, both items are on the list
 
-# The dude verifies the URL works
+        # There is a special URL that gives the dude access to his link
 
-# The dude closes his browser
+        # The dude verifies the URL works
 
-browser.quit()
+        # The dude closes his browser
+        
+
+if __name__ == '__main__':
+    unittest.main()
